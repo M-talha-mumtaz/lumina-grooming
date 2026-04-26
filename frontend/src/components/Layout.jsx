@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, LogOut, ExternalLink, ShieldCheck } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -130,29 +131,67 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </header>
-
-      {/* Mobile Menu Overlay */}
+<AnimatePresence>
+      {/* Premium Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-zinc-950 pt-32 px-6 flex flex-col space-y-6 md:hidden">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-2xl uppercase tracking-wider text-zinc-300 hover:text-gold"
+        <motion.div 
+          initial={{ opacity: 0, y: "-100%" }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: "-100%" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-40 bg-zinc-950 flex flex-col justify-center items-center md:hidden"
+        >
+          {/* Stylized Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-serif text-gold leading-none select-none">
+               APEX
+             </div>
+          </div>
+
+          <div className="flex flex-col items-center space-y-8 z-10">
+            {navLinks.map((link, i) => (
+              <motion.div
+                key={link.path}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + (i * 0.1), duration: 0.5 }}
+              >
+                <Link
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-4xl uppercase tracking-[0.2em] font-serif transition-colors ${location.pathname === link.path ? 'text-gold' : 'text-zinc-300 hover:text-gold'}`}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + (navLinks.length * 0.1), duration: 0.5 }}
             >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            to="/book"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-2xl uppercase tracking-wider text-gold"
+              <Link
+                to="/book"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-4 px-10 py-4 border border-gold text-gold text-2xl uppercase tracking-[0.2em] hover:bg-gold hover:text-zinc-950 transition-all font-serif"
+              >
+                {t('booking')}
+              </Link>
+            </motion.div>
+          </div>
+          
+          {/* Bottom detail */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="absolute bottom-12 text-zinc-600 text-[10px] uppercase tracking-[0.4em]"
           >
-            {t('booking')}
-          </Link>
-        </div>
+            Experience Refinement
+          </motion.div>
+        </motion.div>
       )}
+</AnimatePresence>
 
       <main className="flex-grow pt-0">
         {children}
