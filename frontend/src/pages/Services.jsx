@@ -4,11 +4,12 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+import beardTrimImg from '../assets/beard-trim.jpg';
 
 // Guaranteed luxury men's grooming photography from Unsplash
 const defaultImages = {
   'Haircut': 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80',
-  'Beard Trim': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop',
+  'Beard Trim': beardTrimImg,
   'Hair Styling': 'https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&fit=crop&w=800&q=80'
 };
 
