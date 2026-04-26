@@ -1,33 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Mail, Loader2 } from 'lucide-react';
-import { Loader } from '@googlemaps/js-api-loader';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import { setOptions, importLibrary } from '@googlemaps/js-api-loader';
 
 const Contact = () => {
   const { t } = useTranslation();
   const mapRef = useRef(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const [mapError, setMapError] = useState(false);
 
   useEffect(() => {
-    // If no API key, don't try to load
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-    if (!apiKey || apiKey === 'YOUR_API_KEY_HERE') {
-      console.warn('Google Maps API key is missing or default.');
-      setMapError(true);
-      return;
-    }
+    if (!apiKey) return;
 
-    const loader = new Loader({
+    setOptions({
       apiKey: apiKey,
       version: 'weekly',
     });
 
-    loader.load().then((google) => {
+    Promise.all([
+      importLibrary('maps'),
+      importLibrary('marker'),
+    ]).then(([{ Map }, { Marker }]) => {
       if (!mapRef.current) return;
 
       const position = { lat: 40.7380, lng: -73.9920 };
-      const map = new google.maps.Map(mapRef.current, {
+      const map = new Map(mapRef.current, {
         center: position,
         zoom: 15,
         styles: [
@@ -69,35 +65,24 @@ const Contact = () => {
         zoomControl: true,
       });
 
-      new google.maps.Marker({
+      new Marker({
         position: position,
         map: map,
         title: 'Apex Grooming',
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillColor: '#d4af37',
-          fillOpacity: 1,
-          strokeWeight: 2,
-          strokeColor: '#000',
-        }
       });
-      
-      setMapLoaded(true);
     }).catch(e => {
       console.error('Google Maps Load Error:', e);
-      setMapError(true);
     });
   }, []);
 
   return (
     <div className="min-h-screen pt-40 pb-20 px-6 max-w-6xl mx-auto">
-      <h1 className="text-6xl font-serif text-gold text-center mb-16 tracking-widest uppercase drop-shadow-lg">{t('contact') || 'Contact Us'}</h1>
-      
+      <h1 className="text-6xl font-serif text-gold text-center mb-16 tracking-widest uppercase drop-shadow-lg">{t('contact')}</h1>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div className="space-y-10 bg-zinc-900/40 p-12 border border-zinc-800 backdrop-blur-md">
           <h2 className="text-3xl font-serif text-zinc-200 border-b border-gold/10 pb-6 tracking-wide">Get In Touch</h2>
-          
+
           <div className="flex items-start space-x-6 group">
             <MapPin className="text-gold mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" size={32} />
             <div>
@@ -137,20 +122,8 @@ const Contact = () => {
         </div>
 
         {/* Professional Google Map API Integration */}
-        <div className="h-[650px] border border-zinc-800 relative bg-zinc-950 overflow-hidden shadow-2xl flex items-center justify-center">
-          {!mapLoaded && !mapError && (
-            <div className="flex flex-col items-center space-y-4">
-              <Loader2 className="animate-spin text-gold" size={40} />
-              <span className="text-zinc-500 uppercase tracking-widest text-[10px]">Loading Interactive Map...</span>
-            </div>
-          )}
-          {mapError && (
-            <div className="text-center p-8">
-              <MapPin className="mx-auto text-zinc-800 mb-4" size={48} />
-              <p className="text-zinc-500 text-sm font-light">Map could not be loaded.<br/>Please check your connection and API key.</p>
-            </div>
-          )}
-          <div ref={mapRef} className={`w-full h-full transition-opacity duration-1000 ${mapLoaded ? 'opacity-80 hover:opacity-100' : 'opacity-0'}`} />
+        <div className="h-[650px] border border-zinc-800 relative bg-zinc-950 overflow-hidden shadow-2xl">
+          <div ref={mapRef} className="w-full h-full opacity-80 hover:opacity-100 transition-opacity duration-1000" />
           <div className="absolute inset-0 pointer-events-none border-[20px] border-zinc-950/20 mix-blend-overlay"></div>
         </div>
       </div>
