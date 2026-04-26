@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 // Guaranteed luxury men's grooming photography from Pexels
 const defaultImages = {
   'Haircut': 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80',
-  'Beard Trim': 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80',
+  'Beard Trim': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80',
   'Hair Styling': 'https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&fit=crop&w=800&q=80'
 };
 
@@ -85,7 +86,16 @@ const Services = () => {
                     <span className="text-gold font-serif text-3xl drop-shadow-[0_0_10px_rgba(212,175,55,0.4)] block pb-1">€{service.price}</span>
                   </div>
                   
-                  <p className="text-zinc-400 font-light mb-12 text-base leading-relaxed">{service.description}</p>
+                  <p className="text-zinc-400 font-light mb-8 text-base leading-relaxed">{service.description}</p>
+                  
+                  <div className="mb-10">
+                    <Link 
+                      to={`/book?service=${encodeURIComponent(service.name)}`}
+                      className="inline-block px-8 py-3 bg-white/5 border border-gold/30 text-gold uppercase tracking-[0.2em] text-xs font-bold hover:bg-gold hover:text-zinc-950 transition-all duration-300 rounded-sm"
+                    >
+                      Book Now
+                    </Link>
+                  </div>
                   
                   <div className="flex justify-between items-center mt-auto pt-8 border-t border-white/5 group-hover:border-gold/30 transition-colors duration-500">
                     <span className="text-xs uppercase tracking-[0.25em] text-zinc-500 flex items-center gap-2">

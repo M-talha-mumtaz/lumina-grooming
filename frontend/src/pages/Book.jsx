@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 
 const Book = () => {
   const { t } = useTranslation();
@@ -18,6 +19,8 @@ const Book = () => {
 
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -29,13 +32,26 @@ const Book = () => {
         const strictlyThree = uniqueData.filter(item => targetNames.includes(item.name));
         strictlyThree.sort((a, b) => targetNames.indexOf(a.name) - targetNames.indexOf(b.name));
 
-        setServices(strictlyThree.length > 0 ? strictlyThree : uniqueData);
+        const finalServices = strictlyThree.length > 0 ? strictlyThree : uniqueData;
+        setServices(finalServices);
+
+        // Pre-select service from URL if present
+        const serviceNameFromUrl = searchParams.get('service');
+        if (serviceNameFromUrl) {
+          const matchedService = finalServices.find(s => s.name === serviceNameFromUrl);
+          if (matchedService) {
+            setFormData(prev => ({
+              ...prev,
+              selectedServices: [matchedService._id]
+            }));
+          }
+        }
       } catch (error) {
         console.error('Error fetching services', error);
       }
     };
     fetchServices();
-  }, []);
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
