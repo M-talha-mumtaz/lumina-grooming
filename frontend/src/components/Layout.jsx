@@ -99,6 +99,7 @@ const Layout = ({ children }) => {
             <Link to="/services" className="hover:text-gold transition-colors">{t('services')}</Link>
             <Link to="/about" className="hover:text-gold transition-colors">{t('about')}</Link>
             <Link to="/contact" className="hover:text-gold transition-colors">{t('contact')}</Link>
+            <Link to="/admin/login" className="hover:text-gold transition-colors opacity-40">Staff Login</Link>
           </div>
           <p className="mt-8 text-xs opacity-50">&copy; {new Date().getFullYear()} Apex Salon. All rights reserved.</p>
         </div>
