@@ -25,7 +25,7 @@ const services = [
     name: 'Hair Styling',
     description: 'Professional styling using luxury products providing that perfect finish.',
     price: 30,
-    duration: 45,
+    duration: 25,
     category: 'Styling',
     image: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80'
   }
