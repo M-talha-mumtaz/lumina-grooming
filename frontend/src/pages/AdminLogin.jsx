@@ -40,7 +40,8 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6 max-w-md mx-auto">
+    <div className="min-h-screen pt-32 pb-20 px-6 max-w-md mx-auto flex flex-col items-center">
+      <img src="/favicon.png" alt="Apex Logo" className="h-20 w-20 object-contain drop-shadow-gold mb-8" />
       <h1 className="text-4xl font-serif text-gold text-center mb-10">Admin Login</h1>
       {error && <div className="text-red-400 text-center mb-6">{error}</div>}
       <form onSubmit={handleLogin} className="space-y-6" autoComplete="off">

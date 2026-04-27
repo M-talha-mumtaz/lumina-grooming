@@ -60,8 +60,11 @@ const Layout = ({ children }) => {
         <header className="bg-neutral-900 border-b border-gold/10 py-4 px-6 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <Link to="/admin/dashboard" className="text-xl font-serif text-gold tracking-widest uppercase">
-                Apex <span className="text-[10px] bg-gold/10 px-2 py-0.5 ml-2 border border-gold/20 font-sans tracking-normal">Admin</span>
+              <Link to="/admin/dashboard" className="flex items-center space-x-3 group">
+                <img src="/favicon.png" alt="Apex Logo" className="h-8 w-8 object-contain" />
+                <span className="text-xl font-serif text-gold tracking-widest uppercase group-hover:text-white transition-colors">
+                  Apex <span className="text-[10px] bg-gold/10 px-2 py-0.5 ml-1 border border-gold/20 font-sans tracking-normal">Admin</span>
+                </span>
               </Link>
               <div className="h-6 w-px bg-zinc-800 hidden md:block"></div>
               <Link to="/" className="hidden md:flex items-center space-x-2 text-zinc-400 hover:text-gold transition-colors text-xs uppercase tracking-widest">
@@ -94,8 +97,8 @@ const Layout = ({ children }) => {
         {/* Admin Footer */}
         <footer className="bg-neutral-950 border-t border-zinc-900 py-8 px-6">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-zinc-600 text-[10px] uppercase tracking-[0.2em]">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <ShieldCheck size={14} className="text-gold/50" />
+            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <img src="/favicon.png" alt="Apex Logo" className="h-5 w-5 object-contain opacity-50" />
               <span>Apex Management System &copy; {new Date().getFullYear()}</span>
             </div>
             <div className="flex space-x-8">
@@ -118,8 +121,11 @@ const Layout = ({ children }) => {
     <div className="min-h-screen flex flex-col">
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-zinc-950/90 backdrop-blur-md py-4 border-b border-gold/20' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <Link to="/" className="text-2xl tracking-widest text-gold uppercase font-serif">
-            Apex
+          <Link to="/" className="flex items-center space-x-3 group">
+            <img src="/favicon.png" alt="Apex Logo" className="h-10 w-10 object-contain drop-shadow-gold" />
+            <span className="text-2xl tracking-widest text-gold uppercase font-serif group-hover:text-white transition-colors">
+              Apex
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -215,7 +221,10 @@ const Layout = ({ children }) => {
       {/* Footer */}
       <footer className="bg-zinc-900 border-t border-gold/20 py-12 mt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center text-zinc-400">
-          <h2 className="text-2xl text-gold font-serif mb-6 tracking-widest uppercase">Apex</h2>
+          <div className="flex flex-col items-center mb-6">
+            <img src="/favicon.png" alt="Apex Logo" className="h-12 w-12 object-contain drop-shadow-gold mb-4" />
+            <h2 className="text-2xl text-gold font-serif tracking-widest uppercase">Apex</h2>
+          </div>
           <p className="mb-4">Premium Grooming Experience</p>
           <div className="flex justify-center space-x-6 text-sm">
             <Link to="/services" className="hover:text-gold transition-colors">{t('services')}</Link>
