@@ -97,10 +97,10 @@ const Home = () => {
           <div className="absolute inset-0 bg-neutral-950/70" />
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto will-change-transform" ref={textRef}>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-gold tracking-tight mb-8 glow-text leading-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-gold tracking-tight mb-8 glow-text leading-tight">
             Apex <br/> Grooming
           </h1>
-          <p className="text-lg md:text-xl text-neutral-300 font-light mb-14 tracking-[0.3em] uppercase opacity-90">
+          <p className="text-sm sm:text-lg md:text-xl text-neutral-300 font-light mb-14 tracking-widest sm:tracking-[0.3em] uppercase opacity-90">
             {t('hero_subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -124,14 +124,14 @@ const Home = () => {
       <section className="py-32 md:py-48 bg-neutral-950 relative z-10 flex items-center justify-center text-center px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center mb-10">
-             <div className="h-20 w-[1px] bg-gradient-to-b from-transparent via-gold/50 to-transparent"></div>
+             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
           </div>
           <h2 className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mb-8 font-semibold">The Apex Philosophy</h2>
           <p className="text-3xl md:text-5xl font-serif text-neutral-200 leading-snug md:leading-snug font-light">
             Grooming is an <span className="text-gold italic">art form</span>. It's not just about looking your best, it's about <span className="text-gold italic">feeling unstoppable</span>. Experience the pinnacle of modern refinement.
           </p>
           <div className="flex justify-center mt-12">
-             <div className="h-20 w-[1px] bg-gradient-to-b from-transparent via-gold/50 to-transparent"></div>
+             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
           </div>
         </div>
       </section>
@@ -153,7 +153,7 @@ const Home = () => {
 
       {/* Services Highlight Section */}
       <section ref={servicesRef} className="py-40 bg-neutral-950 text-center relative z-20">
-        <div className="container mx-auto px-6 max-w-7xl">
+        <div className="mx-auto px-6 max-w-7xl">
           <div className="overflow-hidden mb-24">
              <h2 className="text-5xl md:text-6xl text-gold font-serif leading-tight glow-text font-light">Elite Services</h2>
              <div className="h-[1px] w-24 bg-gold/50 mx-auto mt-8"></div>

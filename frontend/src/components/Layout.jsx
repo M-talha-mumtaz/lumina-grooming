@@ -20,6 +20,21 @@ const Layout = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: t('home'), path: '/' },
     { name: t('services'), path: '/services' },
@@ -102,7 +117,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-zinc-950/90 backdrop-blur-md py-4 border-b border-gold/20' : 'bg-transparent py-6'}`}>
-        <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="text-2xl tracking-widest text-gold uppercase font-serif">
             Apex
           </Link>
@@ -139,7 +154,7 @@ const Layout = ({ children }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "-100%" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 bg-zinc-950 flex flex-col justify-center items-center md:hidden"
+          className="fixed inset-0 z-40 bg-zinc-950 flex flex-col justify-center items-center md:hidden touch-none"
         >
           {/* Stylized Background Elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
@@ -199,7 +214,7 @@ const Layout = ({ children }) => {
 
       {/* Footer */}
       <footer className="bg-zinc-900 border-t border-gold/20 py-12 mt-20">
-        <div className="container mx-auto px-6 md:px-12 text-center text-zinc-400">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center text-zinc-400">
           <h2 className="text-2xl text-gold font-serif mb-6 tracking-widest uppercase">Apex</h2>
           <p className="mb-4">Premium Grooming Experience</p>
           <div className="flex justify-center space-x-6 text-sm">
